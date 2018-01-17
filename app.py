@@ -1,4 +1,6 @@
 # encoding: utf-8
+import os
+
 from flask import Flask, request, abort
 
 from linebot import (
@@ -11,11 +13,12 @@ from linebot.models import (
     MessageEvent, TextMessage, TextSendMessage,
 )
 
+
 app = Flask(__name__)
 
-handler = WebhookHandler('Your_Channel_Secret') 
-line_bot_api = LineBotApi('Your_Channel_Access_Token') 
-
+# 使用環境變數，避免資料外洩
+handler = WebhookHandler(os.environ['CHANNEL_SECRET']) 
+line_bot_api = LineBotApi(os.environ['CHANNEL_ACCESS_TOKEN']) 
 
 @app.route('/')
 def index():
@@ -52,6 +55,5 @@ def handle_text_message(event):                  # default
 
 # ================= 機器人區塊 End =================
 
-import os
 if __name__ == "__main__":
     app.run(host='0.0.0.0',port=os.environ['PORT'])
