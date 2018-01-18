@@ -56,4 +56,4 @@ def handle_text_message(event):                  # default
 # ================= 機器人區塊 End =================
 
 if __name__ == "__main__":
-    app.run(host='0.0.0.0',port=os.environ['PORT'])
+    app.run(host='0.0.0.0',port=int(os.environ['PORT']))
